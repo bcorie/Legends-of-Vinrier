@@ -22,6 +22,11 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(SetUpBattle());
     }
 
+    /// <summary>
+    /// Populates the player and enemy into the battle.
+    /// Sets HUDs for player and enemy.
+    /// </summary>
+    /// <returns>Cycle to player's turn.</returns>
     IEnumerator SetUpBattle()
     {
         GameObject playerStart = Instantiate(playerFab, playerSpawn);
@@ -38,6 +43,10 @@ public class BattleSystem : MonoBehaviour
         PlayerTurn();
     }
 
+    /// <summary>
+    /// The player attacks the enemy.
+    /// </summary>
+    /// <returns>End battle if enemy is dead. Cycle to enemy's turn if not.</returns>
     IEnumerator PlayerAttack()
     {
         bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
@@ -55,6 +64,11 @@ public class BattleSystem : MonoBehaviour
         }
 
     }
+
+    /// <summary>
+    /// Enemy turn cycle.
+    /// </summary>
+    /// <returns>Ends the battle if player is defeated. Cycles to player's turn if not.</returns>
     IEnumerator EnemyTurn()
     {
         bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
@@ -75,16 +89,23 @@ public class BattleSystem : MonoBehaviour
     {
         if(state == BattleState.WIN)
         {
+            // win screen
 
+            // return to overworld
         }
         else if (state == BattleState.LOSE)
         {
+            // lose screen
 
         }
     }
     void PlayerTurn()
     {
+        // attack
 
+        // magic
+
+        // items
     }
 
     public void OnAttackButton()

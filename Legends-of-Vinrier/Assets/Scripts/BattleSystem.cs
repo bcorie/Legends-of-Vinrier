@@ -12,8 +12,8 @@ public class BattleSystem : MonoBehaviour
     public GameObject enemyFab;
     public Transform playerSpawn;
     public Transform enemySpawn;
-    Unit playerUnit;
-    Unit enemyUnit;
+    Player playerUnit;
+    Enemy enemyUnit;
 
     public BattleHUD playerHUD;
     public BattleHUD enemyHUD;
@@ -37,11 +37,22 @@ public class BattleSystem : MonoBehaviour
     /// <returns>Cycle to player's turn.</returns>
     IEnumerator SetUpBattle()
     {
-        GameObject playerStart = Instantiate(playerFab, playerSpawn);
-        playerUnit = playerStart.GetComponent<Unit>();
-        GameObject enemyStart = Instantiate(enemyFab, enemySpawn);
-        enemyUnit = enemyStart.GetComponent<Unit>();
-        dialogueText.text = enemyUnit.unitName + " wants to fight!";
+        GameObject playerStart = Instantiate(playerFab, new Vector3((float)-6.06, (float)-1.38), new Quaternion());
+        playerUnit = new Player("Player", 1, 5, 35);
+        GameObject enemyStart = Instantiate(enemyFab, new Vector3((float)6.06, (float)-1.38), new Quaternion());
+
+        // Generates a random enemy
+        int randomEnemy = Random.Range(0, 2);
+        if (randomEnemy == 0)
+        {
+            enemyUnit = new EnemyMelee(1);
+        }
+        else
+        {
+            enemyUnit = new EnemyMage(1);
+        }
+
+        dialogueText.text = enemyUnit.GetUnitName() + " wants to fight!";
         playerHUD.setHUD(playerUnit);
         enemyHUD.setHUD(enemyUnit);
         yield return new WaitForSeconds(2f);
@@ -59,9 +70,9 @@ public class BattleSystem : MonoBehaviour
         attackButton.SetActive(false);
         magicButton.SetActive(false);
         itemsButton.SetActive(false);
-        dialogueText.text = playerUnit.unitName + " launches an attack!";
-        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
-        enemyHUD.setHP(enemyUnit.currentHP);
+        dialogueText.text = playerUnit.GetUnitName() + " uses an attack!";
+        bool isDead = enemyUnit.TakeDamage(playerUnit.GetDamage());
+        enemyHUD.setHP(enemyUnit.GetCurrentHP());
         yield return new WaitForSeconds(2f);
         dialogueText.text =  "";
         if(isDead)
@@ -87,9 +98,9 @@ public class BattleSystem : MonoBehaviour
         magicButton.SetActive(false);
         itemsButton.SetActive(false);
         yield return new WaitForSeconds(2f);
-         dialogueText.text = enemyUnit.unitName + " launches an attack!";
-        bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
-        playerHUD.setHP(playerUnit.currentHP);
+        dialogueText.text = enemyUnit.GetUnitName() + " uses " + enemyUnit.GetAttackName() + " attack!";
+        bool isDead = playerUnit.TakeDamage(enemyUnit.GetDamage());
+        playerHUD.setHP(playerUnit.GetCurrentHP());
         yield return new WaitForSeconds(2f);
         dialogueText.text = "";
         if(isDead)

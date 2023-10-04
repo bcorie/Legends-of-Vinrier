@@ -11,5 +11,10 @@ public abstract class Enemy : Unit
         this.attackName = attackName;
     }
 
+    public string GetAttackName()
+    {
+        return this.attackName;
+    }
+
     public abstract void Attack(Player player);
 }

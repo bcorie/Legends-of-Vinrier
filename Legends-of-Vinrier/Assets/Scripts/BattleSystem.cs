@@ -18,6 +18,8 @@ public class BattleSystem : MonoBehaviour
     public BattleHUD playerHUD;
     public BattleHUD enemyHUD;
     public BattleState state;
+
+    public Text dialogueText;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,12 +41,11 @@ public class BattleSystem : MonoBehaviour
         playerUnit = playerStart.GetComponent<Unit>();
         GameObject enemyStart = Instantiate(enemyFab, enemySpawn);
         enemyUnit = enemyStart.GetComponent<Unit>();
-
+        dialogueText.text = enemyUnit.unitName + " wants to fight!";
         playerHUD.setHUD(playerUnit);
         enemyHUD.setHUD(enemyUnit);
-
         yield return new WaitForSeconds(2f);
-
+        dialogueText.text =  "";
         state = BattleState.PLAYER;
         PlayerTurn();
     }
@@ -58,9 +59,11 @@ public class BattleSystem : MonoBehaviour
         attackButton.SetActive(false);
         magicButton.SetActive(false);
         itemsButton.SetActive(false);
+        dialogueText.text = playerUnit.unitName + " launches an attack!";
         bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
         enemyHUD.setHP(enemyUnit.currentHP);
         yield return new WaitForSeconds(2f);
+        dialogueText.text =  "";
         if(isDead)
         {
             state = BattleState.WIN;
@@ -84,9 +87,11 @@ public class BattleSystem : MonoBehaviour
         magicButton.SetActive(false);
         itemsButton.SetActive(false);
         yield return new WaitForSeconds(2f);
+         dialogueText.text = enemyUnit.unitName + " launches an attack!";
         bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
         playerHUD.setHP(playerUnit.currentHP);
         yield return new WaitForSeconds(2f);
+        dialogueText.text = "";
         if(isDead)
         {
             state = BattleState.LOSE;
@@ -114,6 +119,7 @@ public class BattleSystem : MonoBehaviour
     }
     void PlayerTurn()
     {
+        dialogueText.text =  "Choose an action!";
         attackButton.SetActive(true);
         magicButton.SetActive(true);
         itemsButton.SetActive(true);

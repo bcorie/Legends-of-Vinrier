@@ -5,6 +5,9 @@ using UnityEngine.UI;
 public enum BattleState {START, PLAYER, ENEMY, WIN, LOSE}
 public class BattleSystem : MonoBehaviour
 {
+    public GameObject attackButton;
+    public GameObject magicButton;
+    public GameObject itemsButton;
     public GameObject playerFab;
     public GameObject enemyFab;
     public Transform playerSpawn;
@@ -19,6 +22,9 @@ public class BattleSystem : MonoBehaviour
     void Start()
     {
         state = BattleState.START;
+        attackButton.SetActive(false);
+        magicButton.SetActive(false);
+        itemsButton.SetActive(false);
         StartCoroutine(SetUpBattle());
     }
 
@@ -49,6 +55,9 @@ public class BattleSystem : MonoBehaviour
     /// <returns>End battle if enemy is dead. Cycle to enemy's turn if not.</returns>
     IEnumerator PlayerAttack()
     {
+        attackButton.SetActive(false);
+        magicButton.SetActive(false);
+        itemsButton.SetActive(false);
         bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
         enemyHUD.setHP(enemyUnit.currentHP);
         yield return new WaitForSeconds(2f);
@@ -71,6 +80,10 @@ public class BattleSystem : MonoBehaviour
     /// <returns>Ends the battle if player is defeated. Cycles to player's turn if not.</returns>
     IEnumerator EnemyTurn()
     {
+        attackButton.SetActive(false);
+        magicButton.SetActive(false);
+        itemsButton.SetActive(false);
+        yield return new WaitForSeconds(2f);
         bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
         playerHUD.setHP(playerUnit.currentHP);
         yield return new WaitForSeconds(2f);
@@ -101,11 +114,9 @@ public class BattleSystem : MonoBehaviour
     }
     void PlayerTurn()
     {
-        // attack
-
-        // magic
-
-        // items
+        attackButton.SetActive(true);
+        magicButton.SetActive(true);
+        itemsButton.SetActive(true);
     }
 
     public void OnAttackButton()

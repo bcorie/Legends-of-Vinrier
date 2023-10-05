@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -41,7 +42,11 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("Collision Detected!");
 
-        if (collision.CompareTag("Item"))
+        if (collision.CompareTag("Enemy"))
+        {
+            SceneManager.LoadScene("BattleScene");
+        }
+        else if (collision.CompareTag("Item"))
         {
             Debug.Log("Item Collected!");
             Destroy(collision.gameObject); 

@@ -13,10 +13,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField]
-    GameObject player; // player prefab with Player class
+    public Player player; // player prefab with Player class
 
     [SerializeField]
-    BattleSystem battleSystem;
+    public BattleSystem battleSystem;
 
     // Start is called before the first frame update
     void Start()
@@ -37,20 +37,34 @@ public class GameManager : Singleton<GameManager>
     {
         #region Scene Management
 
-        // battle scene to result screen based on outcome
+        // battle scene to result screen
         if (SceneManager.GetActiveScene().name == "BattleScene")
         {
-            if (battleSystem.state == BattleState.LOSE)
+            if (battleSystem.state == BattleState.LOSE || battleSystem.state == BattleState.WIN)
             {
-
-            }
-
-            if (battleSystem.state == BattleState.WIN)
-            {
-
+                SceneManager.LoadSceneAsync("BattleEnd");
             }
         }
 
         #endregion Scene Management
     }
+
+
+    #region Battle
+
+    public void ButtonPress()
+    {
+        if (battleSystem.state == BattleState.WIN)
+        {
+            SceneManager.LoadScene("Test Area");
+        }
+        else if (battleSystem.state == BattleState.LOSE)
+        {
+            SceneManager.UnloadSceneAsync("Test Area");
+            SceneManager.LoadScene("Test Area");
+            // revert data to original
+        }
+    }
+
+    #endregion Battle
 }

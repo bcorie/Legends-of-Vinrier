@@ -14,7 +14,7 @@ public class BattleSystem : MonoBehaviour
     public Transform playerSpawn;
     public Transform enemySpawn;
     Player playerUnit;
-    Enemy enemyUnit;
+    public Enemy enemyUnit;
 
     public BattleHUD playerHUD;
     public BattleHUD enemyHUD;
@@ -39,7 +39,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator SetUpBattle()
     {
         GameObject playerStart = Instantiate(playerFab, new Vector3((float)-6.06, (float)-1.38), new Quaternion());
-        playerUnit = new Player("Player", 1, 5, 35);
+        playerUnit = new Player("Player", 1, 0, 5, 35);
         GameObject enemyStart = Instantiate(enemyFab, new Vector3((float)6.06, (float)-1.38), new Quaternion());
 
         // Generates a random enemy
@@ -79,7 +79,7 @@ public class BattleSystem : MonoBehaviour
         if(isDead)
         {
             state = BattleState.WIN;
-            EndBattle();
+            //EndBattle();
         }
         else
         {
@@ -107,7 +107,7 @@ public class BattleSystem : MonoBehaviour
         if(isDead)
         {
             state = BattleState.LOSE;
-            EndBattle();
+            //EndBattle();
         }
         else
         {
@@ -115,7 +115,7 @@ public class BattleSystem : MonoBehaviour
             PlayerTurn();
         }
     }
-    void EndBattle()
+    /*void EndBattle()
     {
         if(state == BattleState.WIN)
         {
@@ -129,7 +129,7 @@ public class BattleSystem : MonoBehaviour
             // lose screen
 
         }
-    }
+    }*/
     void PlayerTurn()
     {
         dialogueText.text =  "Choose an action!";

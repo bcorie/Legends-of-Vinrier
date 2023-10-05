@@ -5,8 +5,12 @@ using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Handle cross-scene and core data throughout the game.
+/// 
+/// ( Window > Package Manager > plus in the top left, git URl, https://github.com/Baker-IGM/IGM-Unity-Singleton.git )
+/// Now we can call GameManager anywhere!
 /// </summary>
-public class GameManager : MonoBehaviour
+///
+public class GameManager : Singleton<GameManager>
 {
     [SerializeField]
     GameObject player; // player prefab with Player class

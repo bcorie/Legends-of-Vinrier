@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public enum BattleState {START, PLAYER, ENEMY, WIN, LOSE}
 public class BattleSystem : MonoBehaviour
@@ -121,6 +122,7 @@ public class BattleSystem : MonoBehaviour
             // win screen
 
             // return to overworld
+            SceneManager.LoadScene("Test Area");
         }
         else if (state == BattleState.LOSE)
         {

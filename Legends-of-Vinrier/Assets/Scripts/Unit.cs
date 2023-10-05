@@ -6,14 +6,16 @@ public class Unit : MonoBehaviour
 {
     private string unitName;
     private int unitLevel;
+    private int unitXP;
     private int damage;
     private int maxHP;
     private int currentHP;
 
-    public Unit(string unitName, int unitLevel, int damage, int maxHP)
+    public Unit(string unitName, int unitLevel, int unitXP, int damage, int maxHP)
     {
         this.unitName = unitName;
         this.unitLevel = unitLevel;
+        this.unitXP = unitXP;
         this.damage = damage;
         this.maxHP = maxHP;
         this.currentHP = maxHP;
@@ -39,6 +41,11 @@ public class Unit : MonoBehaviour
     public int GetUnitLevel()
     {
         return this.unitLevel;
+    }
+
+    public int GetXP()
+    {
+        return this.unitXP;
     }
 
     public int GetDamage()

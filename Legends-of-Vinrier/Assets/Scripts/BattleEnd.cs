@@ -31,7 +31,7 @@ public class BattleEnd : MonoBehaviour
         if (battleSystem.state == BattleState.WIN)
         {
             resultText.text = "You won!";
-            int xpWon = battleSystem.enemyUnit.GetUnitLevel();
+            int xpWon = battleSystem.enemyUnit.GetXP();
 
             xpText.text = "XP: " + xpWon + " + " + GameManager.Instance.player.GetXP() + " = " + GameManager.Instance.player.AddXP(xpWon);
 

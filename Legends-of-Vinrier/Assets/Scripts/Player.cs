@@ -6,13 +6,11 @@ public class Player : Unit
 {
     private Vector3 position;
     private List<Item> inventory;
-    private int unitXP;
 
-    public Player(string unitName, int unitLevel, int unitXP, int damage, int maxHP) : base(unitName, unitLevel, damage, maxHP)
+    public Player(string unitName, int unitLevel, int unitXP, int damage, int maxHP) : base(unitName, unitLevel, 0, damage, maxHP)
     {
         this.position = Vector3.zero;
         this.inventory = new List<Item>();
-        this.unitXP = unitXP;
     }
 
     public Vector3 GetPosition()
@@ -23,11 +21,6 @@ public class Player : Unit
     public List<Item> GetInventory()
     {
         return this.inventory;
-    }
-
-    public int GetXP()
-    {
-        return unitXP;
     }
 
     public int AddXP(int amount)

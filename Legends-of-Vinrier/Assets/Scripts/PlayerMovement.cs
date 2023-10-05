@@ -40,5 +40,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Collision Detected!");
+
+        if (collision.CompareTag("Item"))
+        {
+            Debug.Log("Item Collected!");
+            Destroy(collision.gameObject); 
+        }
     }
 }

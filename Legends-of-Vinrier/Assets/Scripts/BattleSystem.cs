@@ -56,7 +56,7 @@ public class BattleSystem : MonoBehaviour
         dialogueText.text = enemyUnit.GetUnitName() + " wants to fight!";
         playerHUD.setHUD(playerUnit);
         enemyHUD.setHUD(enemyUnit);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         dialogueText.text =  "";
         state = BattleState.PLAYER;
         PlayerTurn();
@@ -74,7 +74,7 @@ public class BattleSystem : MonoBehaviour
         dialogueText.text = playerUnit.GetUnitName() + " uses an attack!";
         bool isDead = enemyUnit.TakeDamage(playerUnit.GetDamage());
         enemyHUD.setHP(enemyUnit.GetCurrentHP());
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         dialogueText.text =  "";
         if(isDead)
         {
@@ -89,6 +89,28 @@ public class BattleSystem : MonoBehaviour
 
     }
 
+      IEnumerator PlayerMagic()
+    {
+        attackButton.SetActive(false);
+        magicButton.SetActive(false);
+        itemsButton.SetActive(false);
+        dialogueText.text = playerUnit.GetUnitName() + " uses magic!";
+        bool isDead = enemyUnit.TakeDamage(playerUnit.GetDamage());
+        enemyHUD.setHP(enemyUnit.GetCurrentHP());
+        yield return new WaitForSeconds(1f);
+        dialogueText.text =  "";
+        if(isDead)
+        {
+            state = BattleState.WIN;
+            EndBattle();
+        }
+        else
+        {
+           state = BattleState.ENEMY;
+           StartCoroutine(EnemyTurn());
+        }
+
+    }
     /// <summary>
     /// Enemy turn cycle.
     /// </summary>
@@ -98,11 +120,11 @@ public class BattleSystem : MonoBehaviour
         attackButton.SetActive(false);
         magicButton.SetActive(false);
         itemsButton.SetActive(false);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         dialogueText.text = enemyUnit.GetUnitName() + " uses " + enemyUnit.GetAttackName() + " attack!";
         bool isDead = playerUnit.TakeDamage(enemyUnit.GetDamage());
         playerHUD.setHP(playerUnit.GetCurrentHP());
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         dialogueText.text = "";
         if(isDead)
         {
@@ -144,5 +166,13 @@ public class BattleSystem : MonoBehaviour
         return;
 
         StartCoroutine(PlayerAttack());
+    }
+
+        public void OnMagicButton()
+    {
+        if (state != BattleState.PLAYER)
+        return;
+
+        StartCoroutine(PlayerMagic());
     }
 }

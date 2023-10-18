@@ -1,18 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Item : MonoBehaviour
 {
-    private string itemName;
+    public string Name;
 
     public Item(string itemName)
     {
-        this.itemName = itemName;
+        this.Name = itemName;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            InventoryManager.instance.AddItem(this);
+
+            gameObject.SetActive(false);
+
+            GetComponent<Collider2D>().enabled = false;
+
+            Debug.Log("Player collected: " + this.name);
+        }
     }
 
     public string GetItemName()
     {
-        return this.itemName;
+        return this.Name;
     }
 }

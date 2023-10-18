@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerInput : MonoBehaviour
 {
     public float speed;
     public Rigidbody2D rigidbody;
     private Vector2 moveDirection;
+
+    public GameObject inventoryPanel;
+    public InventoryManager inventoryManager;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +34,11 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
         moveDirection = new Vector2(x, y).normalized;
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+           ToggleInventory();
+        }
     }
 
     void Move()
@@ -46,10 +54,10 @@ public class PlayerMovement : MonoBehaviour
         {
             SceneManager.LoadScene("BattleScene");
         }
-        else if (collision.CompareTag("Item"))
-        {
-            Debug.Log("Item Collected!");
-            Destroy(collision.gameObject); 
-        }
+    }
+
+    public void ToggleInventory()
+    {
+        inventoryPanel.SetActive(!inventoryPanel.activeSelf);
     }
 }

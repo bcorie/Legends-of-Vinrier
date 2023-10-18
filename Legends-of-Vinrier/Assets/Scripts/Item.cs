@@ -30,4 +30,10 @@ public class Item : MonoBehaviour
     {
         return this.Name;
     }
+
+    public void SetItemName(string newName)
+    {
+        this.Name = newName;
+        return;
+    }
 }

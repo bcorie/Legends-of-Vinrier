@@ -26271,6 +26271,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   rigidbody: {fileID: 561871890}
+  inventoryPanel: {fileID: 0}
+  inventoryManager: {fileID: 0}
 --- !u!61 &561871894
 BoxCollider2D:
   m_ObjectHideFlags: 0

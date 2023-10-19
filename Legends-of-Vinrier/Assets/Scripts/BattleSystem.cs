@@ -9,6 +9,9 @@ public class BattleSystem : MonoBehaviour
     public GameObject attackButton;
     public GameObject magicButton;
     public GameObject itemsButton;
+    public GameObject itemsPanel;
+    public GameObject healPotionButton;
+    public GameObject manaPotionButton;
     public GameObject playerFab;
     public GameObject enemyFab;
     public Transform playerSpawn;
@@ -168,11 +171,42 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(PlayerAttack());
     }
 
-        public void OnMagicButton()
+    public void OnMagicButton()
     {
         if (state != BattleState.PLAYER)
         return;
 
         StartCoroutine(PlayerMagic());
+    }
+
+    public void OnItemsButton()
+    {
+        if (state != BattleState.PLAYER)
+        return;
+
+        itemsPanel.SetActive(!itemsPanel.activeSelf);
+    }
+       public void OnHealButton()
+    {
+        if (state != BattleState.PLAYER)
+        return;
+
+        playerUnit.SetCurrentHP(playerUnit.GetCurrentHP() + 10);
+        playerHUD.setHP(playerUnit.GetCurrentHP() + 10);
+        dialogueText.text = playerUnit.GetUnitName() + " Restores some health";
+        Destroy(healPotionButton);
+        itemsPanel.SetActive(false);
+        StartCoroutine(EnemyTurn());
+    }
+
+        public void OnManaButton()
+    {
+        if (state != BattleState.PLAYER)
+        return;
+
+        dialogueText.text = playerUnit.GetUnitName() + " Restores some Mana";
+        Destroy(manaPotionButton);
+         itemsPanel.SetActive(false);
+        StartCoroutine(EnemyTurn());
     }
 }

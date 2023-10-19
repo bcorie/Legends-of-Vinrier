@@ -191,8 +191,16 @@ public class BattleSystem : MonoBehaviour
         if (state != BattleState.PLAYER)
         return;
 
-        playerUnit.SetCurrentHP(playerUnit.GetCurrentHP() + 10);
-        playerHUD.setHP(playerUnit.GetCurrentHP() + 10);
+        if (playerUnit.GetMaxHP() - 10 > playerUnit.GetCurrentHP())
+        {
+            playerUnit.SetCurrentHP(playerUnit.GetCurrentHP() + 10);
+            playerHUD.setHP(playerUnit.GetCurrentHP() + 10);
+        }
+        else
+        {
+            playerUnit.SetCurrentHP(playerUnit.GetMaxHP());
+            playerHUD.setHP(playerUnit.GetMaxHP());
+        }
         dialogueText.text = playerUnit.GetUnitName() + " Restores some health";
         Destroy(healPotionButton);
         itemsPanel.SetActive(false);

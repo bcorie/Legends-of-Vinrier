@@ -144,15 +144,21 @@ public class BattleSystem : MonoBehaviour
     {
         if(state == BattleState.WIN)
         {
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            if (gameManager != null)
+            {
+                gameManager.playerHealth = playerUnit.GetCurrentHP();
+            }
+
             // win screen
 
             // return to overworld
-            SceneManager.LoadScene("Test Area");
+            SceneManager.LoadScene("Map 1");
         }
         else if (state == BattleState.LOSE)
         {
             // lose screen
-
+            SceneManager.LoadScene("BattleEnd");
         }
     }
     void PlayerTurn()

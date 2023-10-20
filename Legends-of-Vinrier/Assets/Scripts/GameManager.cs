@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     GameObject player; // player prefab with Player class
+    public int playerHealth;
 
     [SerializeField]
     BattleSystem battleSystem;

@@ -10,6 +10,19 @@ public class Player : Unit
     {
         this.position = Vector3.zero;
         this.inventory = new List<Item>();
+
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null)
+        {
+            if (gameManager.playerHealth > 0)
+            {
+                this.SetCurrentHP(gameManager.playerHealth);
+            }
+            else
+            {
+                gameManager.playerHealth = this.GetMaxHP();
+            }
+        }
     }
 
     public Vector3 GetPosition()

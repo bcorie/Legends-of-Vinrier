@@ -200,7 +200,7 @@ public class BattleSystem : MonoBehaviour
         if (playerUnit.GetMaxHP() - 10 > playerUnit.GetCurrentHP())
         {
             playerUnit.SetCurrentHP(playerUnit.GetCurrentHP() + 10);
-            playerHUD.setHP(playerUnit.GetCurrentHP() + 10);
+            playerHUD.setHP(playerUnit.GetCurrentHP());
         }
         else
         {

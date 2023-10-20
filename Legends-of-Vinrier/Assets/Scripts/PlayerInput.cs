@@ -9,19 +9,40 @@ public class PlayerInput : MonoBehaviour
     public Rigidbody2D rigidbody;
     private Vector2 moveDirection;
 
+    // A count for five frames to delete any enemies that the player contacts
+    private int spawnOnEnemyCount;
+
     public GameObject inventoryPanel;
     public InventoryManager inventoryManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null)
+        {
+            if (gameManager.playerPosition != null)
+            {
+                rigidbody.position = gameManager.playerPosition;
+            }
+            else
+            {
+                gameManager.playerPosition = Vector2.zero;
+            }
+        }
+
+        spawnOnEnemyCount = 5;
     }
 
     // Update is called once per frame
     void Update()
     {
         GetInputs();
+
+        if (spawnOnEnemyCount > 0)
+        {
+            spawnOnEnemyCount--;
+        }
     }
 
     void FixedUpdate()
@@ -52,7 +73,19 @@ public class PlayerInput : MonoBehaviour
 
         if (collision.CompareTag("Enemy"))
         {
-            SceneManager.LoadScene("BattleScene");
+            if (spawnOnEnemyCount > 0)
+            {
+                Destroy(collision.gameObject);
+            }
+            else
+            {
+                GameManager gameManager = FindObjectOfType<GameManager>();
+                if (gameManager != null)
+                {
+                    gameManager.playerPosition = rigidbody.position;
+                }
+                SceneManager.LoadScene("BattleScene");
+            }
         }
     }
 

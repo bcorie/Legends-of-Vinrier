@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     GameObject player; // player prefab with Player class
     public int playerHealth;
+    public Vector2 playerPosition;
 
     [SerializeField]
     BattleSystem battleSystem;

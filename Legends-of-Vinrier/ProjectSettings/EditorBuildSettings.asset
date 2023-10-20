@@ -8,15 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test Area.unity
     guid: e49349b360a672c4181a22d0ce53798f
   - enabled: 1
-    path: Assets/Scenes/BattleScene.unity
-    guid: 4a46b728b5e3d9444b3d837ec2bb03cc
-  - enabled: 1
     path: Assets/Scenes/Map 1.unity
     guid: 6701f0d9e17c1ec45a58342d1949a745
+  - enabled: 1
+    path: Assets/Scenes/BattleScene.unity
+    guid: 4a46b728b5e3d9444b3d837ec2bb03cc
   - enabled: 1
     path: Assets/Scenes/BattleEnd.unity
     guid: 8277a477f5a85524da912f2231df0be4

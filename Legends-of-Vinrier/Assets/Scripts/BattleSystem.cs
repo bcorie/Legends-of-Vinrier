@@ -42,7 +42,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator SetUpBattle()
     {
         GameObject playerStart = Instantiate(playerFab, new Vector3((float)-6.06, (float)-1.38), new Quaternion());
-        playerUnit = new Player("Player", 1, 5, 35, 3, 1);
+        playerUnit = new Player("Player", 1, 5, 40, 3, 1);
         GameObject enemyStart = Instantiate(enemyFab, new Vector3((float)6.06, (float)-1.38), new Quaternion());
 
         // Generates a random enemy
@@ -75,9 +75,9 @@ public class BattleSystem : MonoBehaviour
         magicButton.SetActive(false);
         itemsButton.SetActive(false);
         dialogueText.text = playerUnit.GetUnitName() + " uses an attack!";
-        enemyUnit.TakeDamage(playerUnit.GetDamage(), Unit.DamageType.Physical);
+
+        playerUnit.PhysicalAttack(enemyUnit);
         enemyHUD.setHP(enemyUnit.GetCurrentHP());
-        
         bool isDead = enemyUnit.GetCurrentHP() <= 0;
 
         yield return new WaitForSeconds(1f);
@@ -101,9 +101,9 @@ public class BattleSystem : MonoBehaviour
         magicButton.SetActive(false);
         itemsButton.SetActive(false);
         dialogueText.text = playerUnit.GetUnitName() + " shoots a beam of ice at the " + enemyUnit.GetUnitName() + "!";
-        enemyUnit.TakeDamage(playerUnit.GetDamage(), Unit.DamageType.Magical);
-        enemyHUD.setHP(enemyUnit.GetCurrentHP());
 
+        playerUnit.MagicalAttack(enemyUnit);
+        enemyHUD.setHP(enemyUnit.GetCurrentHP());
         bool isDead = enemyUnit.GetCurrentHP() <= 0;
 
         yield return new WaitForSeconds(1f);
@@ -206,15 +206,15 @@ public class BattleSystem : MonoBehaviour
         if (state != BattleState.PLAYER)
         return;
 
-        if (playerUnit.GetMaxHP() - 10 > playerUnit.GetCurrentHP())
+        if (playerUnit.GetMaxHP() / 2 > playerUnit.GetCurrentHP())
         {
-            playerUnit.SetCurrentHP(playerUnit.GetCurrentHP() + 10);
+            playerUnit.SetCurrentHP(playerUnit.GetCurrentHP() + (playerUnit.GetMaxHP() / 2));
             playerHUD.setHP(playerUnit.GetCurrentHP());
         }
         else
         {
             playerUnit.SetCurrentHP(playerUnit.GetMaxHP());
-            playerHUD.setHP(playerUnit.GetMaxHP());
+            playerHUD.setHP(playerUnit.GetCurrentHP());
         }
         dialogueText.text = playerUnit.GetUnitName() + " Restores some health";
         Destroy(healPotionButton);

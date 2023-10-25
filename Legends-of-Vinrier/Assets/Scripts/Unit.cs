@@ -35,18 +35,14 @@ public class Unit : MonoBehaviour
         if (type == DamageType.Physical)
         {
             dmg -= this.physicalArmor;
-            if (dmg > 0)
-            {
-                currentHP -= dmg;
-            }
         }
         else if (type == DamageType.Magical)
         {
             dmg -= this.magicalArmor;
-            if (dmg > 0)
-            {
-                currentHP -= dmg;
-            }
+        }
+        if (dmg > 0)
+        {
+            currentHP -= dmg;
         }
     }
 

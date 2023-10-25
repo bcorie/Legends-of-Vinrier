@@ -6,7 +6,7 @@ public abstract class Enemy : Unit
 {
     private string attackName;
 
-    public Enemy(string unitName, int unitLevel, int damage, int maxHP, string attackName) : base(unitName, unitLevel, damage, maxHP)
+    public Enemy(string unitName, int unitLevel, int damage, int maxHP, string attackName, int physicalArmor, int magicalArmor) : base(unitName, unitLevel, damage, maxHP, physicalArmor, magicalArmor)
     {
         this.attackName = attackName;
     }

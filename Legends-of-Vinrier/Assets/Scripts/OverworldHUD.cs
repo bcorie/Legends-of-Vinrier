@@ -17,7 +17,7 @@ public class OverworldHUD : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerUnit = new Player("Player", 1, 5, 35);
+        playerUnit = new Player("Player", 1, 5, 35, 3, 1);
         playerHUD.setHUD(playerUnit);
 
         menu.gameObject.SetActive(false);

@@ -42,7 +42,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator SetUpBattle()
     {
         GameObject playerStart = Instantiate(playerFab, new Vector3((float)-6.06, (float)-1.38), new Quaternion());
-        playerUnit = new Player("Player", 1, 5, 35);
+        playerUnit = new Player("Player", 1, 5, 35, 3, 1);
         GameObject enemyStart = Instantiate(enemyFab, new Vector3((float)6.06, (float)-1.38), new Quaternion());
 
         // Generates a random enemy
@@ -75,8 +75,11 @@ public class BattleSystem : MonoBehaviour
         magicButton.SetActive(false);
         itemsButton.SetActive(false);
         dialogueText.text = playerUnit.GetUnitName() + " uses an attack!";
-        bool isDead = enemyUnit.TakeDamage(playerUnit.GetDamage());
+        enemyUnit.TakeDamage(playerUnit.GetDamage(), Unit.DamageType.Physical);
         enemyHUD.setHP(enemyUnit.GetCurrentHP());
+        
+        bool isDead = enemyUnit.GetCurrentHP() <= 0;
+
         yield return new WaitForSeconds(1f);
         dialogueText.text =  "";
         if(isDead)
@@ -97,9 +100,12 @@ public class BattleSystem : MonoBehaviour
         attackButton.SetActive(false);
         magicButton.SetActive(false);
         itemsButton.SetActive(false);
-        dialogueText.text = playerUnit.GetUnitName() + " uses magic!";
-        bool isDead = enemyUnit.TakeDamage(playerUnit.GetDamage());
+        dialogueText.text = playerUnit.GetUnitName() + " shoots a beam of ice at the " + enemyUnit.GetUnitName() + "!";
+        enemyUnit.TakeDamage(playerUnit.GetDamage(), Unit.DamageType.Magical);
         enemyHUD.setHP(enemyUnit.GetCurrentHP());
+
+        bool isDead = enemyUnit.GetCurrentHP() <= 0;
+
         yield return new WaitForSeconds(1f);
         dialogueText.text =  "";
         if(isDead)
@@ -125,8 +131,11 @@ public class BattleSystem : MonoBehaviour
         itemsButton.SetActive(false);
         yield return new WaitForSeconds(1f);
         dialogueText.text = enemyUnit.GetUnitName() + " uses " + enemyUnit.GetAttackName() + " attack!";
-        bool isDead = playerUnit.TakeDamage(enemyUnit.GetDamage());
+
+        enemyUnit.Attack(playerUnit);
         playerHUD.setHP(playerUnit.GetCurrentHP());
+        bool isDead = playerUnit.GetCurrentHP() <= 0;
+
         yield return new WaitForSeconds(1f);
         dialogueText.text = "";
         if(isDead)

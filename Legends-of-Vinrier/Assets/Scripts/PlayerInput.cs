@@ -12,6 +12,9 @@ public class PlayerInput : MonoBehaviour
     // A count for five frames to delete any enemies that the player contacts
     private int spawnOnEnemyCount;
 
+    [SerializeField]
+    private OverworldHUD hud;
+
     public GameObject inventoryPanel;
     public InventoryManager inventoryManager;
 
@@ -60,6 +63,11 @@ public class PlayerInput : MonoBehaviour
         {
            ToggleInventory();
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            hud.MenuToggle();
+        }
+
     }
 
     void Move()

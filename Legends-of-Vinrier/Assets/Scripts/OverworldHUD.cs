@@ -37,6 +37,7 @@ public class OverworldHUD : MonoBehaviour
         {
             menuText.text = "Open menu";
             menu.gameObject.SetActive(false);
+            menu.InventoryClick();
         }
         else // menu inactive
         {

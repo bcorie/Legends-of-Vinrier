@@ -13,6 +13,8 @@ public class OverworldHUD : MonoBehaviour
     [SerializeField]
     private GameObject menuControlHUD;
     private TextMeshProUGUI menuText;
+    [SerializeField]
+    private GameObject inventoryHUD;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +39,7 @@ public class OverworldHUD : MonoBehaviour
         {
             menuText.text = "Open menu";
             menu.gameObject.SetActive(false);
-            menu.InventoryClick();
+            //inventoryHUD.SetActive(false);
         }
         else // menu inactive
         {

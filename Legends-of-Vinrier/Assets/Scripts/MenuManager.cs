@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Handle button presses for the menu.
@@ -25,6 +26,7 @@ public class MenuManager : MonoBehaviour
     public void InventoryClick()
     {
         inventory.SetActive(!inventory.activeSelf);
+        Debug.Log("Inv click");
     }
 
     public void SkillClick()
@@ -46,5 +48,9 @@ public class MenuManager : MonoBehaviour
     {
         // return to title screen
         // or restart playtest
+
+        SceneManager.UnloadSceneAsync("Map 1");
+        SceneManager.LoadSceneAsync("Map 1");
+
     }
 }

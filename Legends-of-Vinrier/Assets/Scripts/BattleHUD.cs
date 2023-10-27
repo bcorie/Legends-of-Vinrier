@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro.Examples;
@@ -24,6 +25,11 @@ public class BattleHUD : MonoBehaviour
 
     public void setHP(int hp)
     {
-        hpSlider.value = hp;
+        // keep the HP value at a minimum of 0
+        int val = (hp < 0) ? 0 : hp;
+        hpSlider.value = val;
+        hpCurrent.text = val.ToString();
+
+        Debug.Log("Set hp to " + val);
     }
 }

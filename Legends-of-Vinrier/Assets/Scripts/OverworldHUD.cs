@@ -33,6 +33,9 @@ public class OverworldHUD : MonoBehaviour
         playerHUD.setHUD(playerUnit);
     }
 
+    /// <summary>
+    /// Toggle menu view.
+    /// </summary>
     public void MenuToggle()
     {
         if (menu.gameObject.activeSelf) // menu active

@@ -59,10 +59,13 @@ public class PlayerInput : MonoBehaviour
         float y = Input.GetAxisRaw("Vertical");
         moveDirection = new Vector2(x, y).normalized;
 
+        // I = Inventory
         if (Input.GetKeyDown(KeyCode.I))
         {
            ToggleInventory();
         }
+
+        // ESC = Menu
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             hud.MenuToggle();

@@ -18,11 +18,9 @@ public class BattleSystem : MonoBehaviour
     public Transform enemySpawn;
     Player playerUnit;
     Enemy enemyUnit;
-
     public BattleHUD playerHUD;
     public BattleHUD enemyHUD;
     public BattleState state;
-
     public Text dialogueText;
     // Start is called before the first frame update
     void Start()
@@ -42,18 +40,20 @@ public class BattleSystem : MonoBehaviour
     IEnumerator SetUpBattle()
     {
         GameObject playerStart = Instantiate(playerFab, new Vector3((float)-6.06, (float)-1.38), new Quaternion());
-        playerUnit = new Player("Player", 1, 5, 35, 3, 1);
+        playerUnit = new Player("Player", 1, 5, 40, 3, 1);
+        playerUnit.playerGameObject = playerStart;
         GameObject enemyStart = Instantiate(enemyFab, new Vector3((float)6.06, (float)-1.38), new Quaternion());
-
         // Generates a random enemy
         int randomEnemy = Random.Range(0, 2);
         if (randomEnemy == 0)
         {
             enemyUnit = new EnemyMelee(1);
+            enemyUnit.enemyGameObject = enemyStart;
         }
         else
         {
             enemyUnit = new EnemyMage(1);
+            enemyUnit.enemyGameObject = enemyStart;
         }
 
         dialogueText.text = enemyUnit.GetUnitName() + " wants to fight!";
@@ -75,12 +75,40 @@ public class BattleSystem : MonoBehaviour
         magicButton.SetActive(false);
         itemsButton.SetActive(false);
         dialogueText.text = playerUnit.GetUnitName() + " uses an attack!";
-        enemyUnit.TakeDamage(playerUnit.GetDamage(), Unit.DamageType.Physical);
-        enemyHUD.setHP(enemyUnit.GetCurrentHP());
-        
-        bool isDead = enemyUnit.GetCurrentHP() <= 0;
+        // Get the player's starting position
+        Vector3 startPos = playerUnit.playerGameObject.transform.position;
 
+        // Calculate the end position (this example moves the player 2 units forward)
+        Vector3 endPos = new Vector3(startPos.x + 2, startPos.y, startPos.z);
+
+        // Set the duration of the movement (in seconds)
+        float duration = 0.5f;
+
+        // Use a for loop to move the player over time
+    for (float t = 0; t < duration; t += Time.deltaTime)
+    {
+        // Calculate the current position based on the elapsed time
+        playerUnit.playerGameObject.transform.position = Vector3.Lerp(startPos, endPos, t / duration);
+        yield return null; // Wait for the next frame
+    }
+
+        // Ensure the player has moved to the exact end position
+        playerUnit.playerGameObject.transform.position = endPos;
+
+        playerUnit.PhysicalAttack(enemyUnit);
+        enemyHUD.setHP(enemyUnit.GetCurrentHP());
+        enemyHUD.setHUD(enemyUnit);
+        bool isDead = enemyUnit.GetCurrentHP() <= 0;
         yield return new WaitForSeconds(1f);
+        // Move the player back to the starting position
+    for (float t = 0; t < duration; t += Time.deltaTime)
+    {
+        playerUnit.playerGameObject.transform.position = Vector3.Lerp(endPos, startPos, t / duration);
+        yield return null; // Wait for the next frame
+    }
+
+        // Ensure player is exactly at the starting position
+        playerUnit.playerGameObject.transform.position = startPos;
         dialogueText.text =  "";
         if(isDead)
         {
@@ -101,12 +129,40 @@ public class BattleSystem : MonoBehaviour
         magicButton.SetActive(false);
         itemsButton.SetActive(false);
         dialogueText.text = playerUnit.GetUnitName() + " shoots a beam of ice at the " + enemyUnit.GetUnitName() + "!";
-        enemyUnit.TakeDamage(playerUnit.GetDamage(), Unit.DamageType.Magical);
-        enemyHUD.setHP(enemyUnit.GetCurrentHP());
+        // Get the player's starting position
+        Vector3 startPos = playerUnit.playerGameObject.transform.position;
 
+        // Calculate the end position (this example moves the player 2 units forward)
+        Vector3 endPos = new Vector3(startPos.x + 2, startPos.y, startPos.z);
+
+        // Set the duration of the movement (in seconds)
+        float duration = 0.5f;
+
+        // Use a for loop to move the player over time
+    for (float t = 0; t < duration; t += Time.deltaTime)
+    {
+        // Calculate the current position based on the elapsed time
+        playerUnit.playerGameObject.transform.position = Vector3.Lerp(startPos, endPos, t / duration);
+        yield return null; // Wait for the next frame
+    }
+
+        // Ensure the player has moved to the exact end position
+        playerUnit.playerGameObject.transform.position = endPos;
+        playerUnit.MagicalAttack(enemyUnit);
+        enemyHUD.setHP(enemyUnit.GetCurrentHP());
+        enemyHUD.setHUD(enemyUnit);
         bool isDead = enemyUnit.GetCurrentHP() <= 0;
 
         yield return new WaitForSeconds(1f);
+           // Move the player back to the starting position
+    for (float t = 0; t < duration; t += Time.deltaTime)
+    {
+        playerUnit.playerGameObject.transform.position = Vector3.Lerp(endPos, startPos, t / duration);
+        yield return null; // Wait for the next frame
+    }
+
+        // Ensure player is exactly at the starting position
+        playerUnit.playerGameObject.transform.position = startPos;
         dialogueText.text =  "";
         if(isDead)
         {
@@ -131,12 +187,39 @@ public class BattleSystem : MonoBehaviour
         itemsButton.SetActive(false);
         yield return new WaitForSeconds(1f);
         dialogueText.text = enemyUnit.GetUnitName() + " uses " + enemyUnit.GetAttackName() + " attack!";
+         // Get the enemy's starting position
+    Vector3 startPos = enemyUnit.enemyGameObject.transform.position;
 
+    // Define the end position (this might be the player's position)
+     Vector3 endPos = new Vector3(startPos.x - 2, startPos.y, startPos.z);
+
+    // Duration of the movement
+    float duration = 1f;
+
+    // Move the enemy to the end position
+    for (float t = 0; t < duration; t += Time.deltaTime)
+    {
+        enemyUnit.enemyGameObject.transform.position = Vector3.Lerp(startPos, endPos, t / duration);
+        yield return null; // Wait for the next frame
+    }
+
+    // Ensure enemy is exactly at the end position
+    enemyUnit.enemyGameObject.transform.position = endPos;
         enemyUnit.Attack(playerUnit);
         playerHUD.setHP(playerUnit.GetCurrentHP());
+        playerHUD.setHUD(playerUnit);
         bool isDead = playerUnit.GetCurrentHP() <= 0;
 
         yield return new WaitForSeconds(1f);
+        // Move the enemy back to the starting position
+    for (float t = 0; t < duration; t += Time.deltaTime)
+    {
+        enemyUnit.enemyGameObject.transform.position = Vector3.Lerp(endPos, startPos, t / duration);
+        yield return null; // Wait for the next frame
+    }
+
+    // Ensure enemy is exactly at the starting position
+    enemyUnit.enemyGameObject.transform.position = startPos;
         dialogueText.text = "";
         if(isDead)
         {
@@ -206,15 +289,17 @@ public class BattleSystem : MonoBehaviour
         if (state != BattleState.PLAYER)
         return;
 
-        if (playerUnit.GetMaxHP() - 10 > playerUnit.GetCurrentHP())
+        if (playerUnit.GetMaxHP() / 2 > playerUnit.GetCurrentHP())
         {
-            playerUnit.SetCurrentHP(playerUnit.GetCurrentHP() + 10);
+            playerUnit.SetCurrentHP(playerUnit.GetCurrentHP() + (playerUnit.GetMaxHP() / 2));
             playerHUD.setHP(playerUnit.GetCurrentHP());
+            playerHUD.setHUD(playerUnit);
         }
         else
         {
             playerUnit.SetCurrentHP(playerUnit.GetMaxHP());
-            playerHUD.setHP(playerUnit.GetMaxHP());
+            playerHUD.setHP(playerUnit.GetCurrentHP());
+            playerHUD.setHUD(playerUnit);
         }
         dialogueText.text = playerUnit.GetUnitName() + " Restores some health";
         Destroy(healPotionButton);

@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         #region Scene Management
-
+        /*
         // battle scene to result screen based on outcome
         if (SceneManager.GetActiveScene().name == "BattleScene")
         {
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
 
             }
         }
-
+        */
         #endregion Scene Management
     }
 }

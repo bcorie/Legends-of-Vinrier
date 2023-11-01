@@ -40,6 +40,7 @@ public class Unit : MonoBehaviour
         {
             dmg -= this.magicalArmor;
         }
+
         if (dmg > 0)
         {
             currentHP -= dmg;

@@ -98,6 +98,10 @@ public class PlayerInput : MonoBehaviour
                 SceneManager.LoadScene("BattleScene");
             }
         }
+        else if (collision.CompareTag("Boss1"))
+        {
+
+        }
     }
 
     public void ToggleInventory()

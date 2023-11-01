@@ -100,7 +100,12 @@ public class PlayerInput : MonoBehaviour
         }
         else if (collision.CompareTag("Boss1"))
         {
-
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            if (gameManager != null)
+            {
+                gameManager.boss1 = true;
+            }
+            SceneManager.LoadScene("BattleScene");
         }
     }
 

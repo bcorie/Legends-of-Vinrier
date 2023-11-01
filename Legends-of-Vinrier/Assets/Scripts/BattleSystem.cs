@@ -43,17 +43,29 @@ public class BattleSystem : MonoBehaviour
         playerUnit = new Player("Player", 1, 5, 40, 3, 1);
         playerUnit.playerGameObject = playerStart;
         GameObject enemyStart = Instantiate(enemyFab, new Vector3((float)6.06, (float)-1.38), new Quaternion());
-        // Generates a random enemy
-        int randomEnemy = Random.Range(0, 2);
-        if (randomEnemy == 0)
+        // Generates a random enemy or starts the boss fight
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null)
         {
-            enemyUnit = new EnemyMelee(1);
-            enemyUnit.enemyGameObject = enemyStart;
+            if (gameManager.boss1)
+            {
+                enemyUnit = new EnemyElgrim(5);
+                enemyUnit.enemyGameObject = enemyStart;
+            }
         }
         else
         {
-            enemyUnit = new EnemyMage(1);
-            enemyUnit.enemyGameObject = enemyStart;
+            int randomEnemy = Random.Range(0, 2);
+            if (randomEnemy == 0)
+            {
+                enemyUnit = new EnemyMelee(1);
+                enemyUnit.enemyGameObject = enemyStart;
+            }
+            else
+            {
+                enemyUnit = new EnemyMage(1);
+                enemyUnit.enemyGameObject = enemyStart;
+            }
         }
 
         dialogueText.text = enemyUnit.GetUnitName() + " wants to fight!";

@@ -9,25 +9,40 @@ public class Unit : MonoBehaviour
     private int damage;
     private int maxHP;
     private int currentHP;
+    private int physicalArmor;
+    private int magicalArmor;
 
-    public Unit(string unitName, int unitLevel, int damage, int maxHP)
+    // Damage types
+    public enum DamageType
+    {
+        Physical,
+        Magical
+    }
+
+    public Unit(string unitName, int unitLevel, int damage, int maxHP, int physicalArmor, int magicalArmor)
     {
         this.unitName = unitName;
         this.unitLevel = unitLevel;
         this.damage = damage;
         this.maxHP = maxHP;
         this.currentHP = maxHP;
+        this.physicalArmor = physicalArmor;
+        this.magicalArmor = magicalArmor;
     }
 
-    public virtual bool TakeDamage(int dmg)
+    public virtual void TakeDamage(int dmg, DamageType type)
     {
-        currentHP -= dmg;
-        if(currentHP <= 0 )
+        if (type == DamageType.Physical)
         {
-            return true;
+            dmg -= this.physicalArmor;
         }
-        else{
-            return false;
+        else if (type == DamageType.Magical)
+        {
+            dmg -= this.magicalArmor;
+        }
+        if (dmg > 0)
+        {
+            currentHP -= dmg;
         }
     }
 
@@ -54,6 +69,16 @@ public class Unit : MonoBehaviour
     public int GetCurrentHP()
     {
         return this.currentHP;
+    }
+
+    public int GetPhysicalArmor()
+    {
+        return this.physicalArmor;
+    }
+
+    public int GetMagicalArmor()
+    {
+        return this.magicalArmor;
     }
 
     public void SetCurrentHP(int newValue)

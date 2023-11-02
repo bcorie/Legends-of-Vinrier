@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public float threshold;
-    public float switchesFlicked;
+    public int threshold;
+    public int switchesFlicked;
+    public Sprite[] sprites;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,10 @@ public class Door : MonoBehaviour
         if (switchesFlicked == threshold)
         {
             gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = sprites[0+switchesFlicked];
         }
     }
 }

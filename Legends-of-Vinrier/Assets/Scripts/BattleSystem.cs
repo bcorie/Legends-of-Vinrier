@@ -52,6 +52,20 @@ public class BattleSystem : MonoBehaviour
                 enemyUnit = new EnemyElgrim(5);
                 enemyUnit.enemyGameObject = enemyStart;
             }
+            else
+            {
+                int randomEnemy = Random.Range(0, 2);
+                if (randomEnemy == 0)
+                {
+                    enemyUnit = new EnemyMelee(1);
+                    enemyUnit.enemyGameObject = enemyStart;
+                }
+                else
+                {
+                    enemyUnit = new EnemyMage(1);
+                    enemyUnit.enemyGameObject = enemyStart;
+                }
+            }
         }
         else
         {

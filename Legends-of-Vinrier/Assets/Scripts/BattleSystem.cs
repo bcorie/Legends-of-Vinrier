@@ -14,6 +14,9 @@ public class BattleSystem : MonoBehaviour
     public GameObject manaPotionButton;
     public GameObject playerFab;
     public GameObject enemyFab;
+    public GameObject bossFab;
+    [SerializeField] private GameObject soulPrefab; // The soul prefab to instantiate
+    [SerializeField] private GameObject soulContainer; // The parent container for the souls in the UI
     public Transform playerSpawn;
     public Transform enemySpawn;
     Player playerUnit;
@@ -42,26 +45,30 @@ public class BattleSystem : MonoBehaviour
         GameObject playerStart = Instantiate(playerFab, new Vector3((float)-6.06, (float)-1.38), new Quaternion());
         playerUnit = new Player("Player", 1, 5, 40, 3, 1);
         playerUnit.playerGameObject = playerStart;
-        GameObject enemyStart = Instantiate(enemyFab, new Vector3((float)6.06, (float)-1.38), new Quaternion());
         // Generates a random enemy or starts the boss fight
         GameManager gameManager = FindObjectOfType<GameManager>();
         if (gameManager != null)
         {
             if (gameManager.boss1)
             {
+                GameObject enemyStart = Instantiate(bossFab, new Vector3((float)6.06, (float)-1.38), new Quaternion());
+                EnemyElgrim enemyElgrim = enemyStart.AddComponent<EnemyElgrim>();
                 enemyUnit = new EnemyElgrim(5);
                 enemyUnit.enemyGameObject = enemyStart;
+                UpdateSoulUI(enemyElgrim.GetSouls());
             }
             else
             {
                 int randomEnemy = Random.Range(0, 2);
                 if (randomEnemy == 0)
                 {
+                    GameObject enemyStart = Instantiate(enemyFab, new Vector3((float)6.06, (float)-1.38), new Quaternion());
                     enemyUnit = new EnemyMelee(1);
                     enemyUnit.enemyGameObject = enemyStart;
                 }
                 else
                 {
+                    GameObject enemyStart = Instantiate(enemyFab, new Vector3((float)6.06, (float)-1.38), new Quaternion());
                     enemyUnit = new EnemyMage(1);
                     enemyUnit.enemyGameObject = enemyStart;
                 }
@@ -72,11 +79,13 @@ public class BattleSystem : MonoBehaviour
             int randomEnemy = Random.Range(0, 2);
             if (randomEnemy == 0)
             {
+                GameObject enemyStart = Instantiate(enemyFab, new Vector3((float)6.06, (float)-1.38), new Quaternion());
                 enemyUnit = new EnemyMelee(1);
                 enemyUnit.enemyGameObject = enemyStart;
             }
             else
             {
+                GameObject enemyStart = Instantiate(enemyFab, new Vector3((float)6.06, (float)-1.38), new Quaternion());
                 enemyUnit = new EnemyMage(1);
                 enemyUnit.enemyGameObject = enemyStart;
             }
@@ -343,4 +352,29 @@ public class BattleSystem : MonoBehaviour
          itemsPanel.SetActive(false);
         StartCoroutine(EnemyTurn());
     }
+   public void UpdateSoulUI(int soulCount)
+{
+  // First, clear out any existing soul prefabs
+    foreach (Transform child in soulContainer.transform)
+    {
+        GameObject.Destroy(child.gameObject);
+    }
+
+    // Define the starting position and offset for each soul
+    Vector3 startPosition = new Vector3(0, 3, 0); // Adjust as needed
+    float xOffset = 1f; // Horizontal offset between souls
+
+    // Now, instantiate new soul prefabs based on the soulCount
+    for (int i = 0; i < soulCount; i++)
+    {
+        Debug.Log("Instantiating soul prefab number: " + (i + 1));
+
+        // Instantiate the soul prefab
+        GameObject newSoul = Instantiate(soulPrefab, soulContainer.transform, false);
+
+        // Set the position with an offset for each soul
+        newSoul.transform.position = new Vector3(startPosition.x + (xOffset * i), startPosition.y, startPosition.z);
+    }
+
+}
 }

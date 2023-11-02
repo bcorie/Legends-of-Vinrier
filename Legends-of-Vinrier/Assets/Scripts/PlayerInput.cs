@@ -26,7 +26,7 @@ public class PlayerInput : MonoBehaviour
         {
             if (gameManager.playerPosition != null)
             {
-                rigidbody.position = gameManager.playerPosition;
+                gameManager.playerPosition = new Vector2(50,60);
             }
             else
             {

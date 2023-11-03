@@ -2,37 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
+public class Item : ScriptableObject
 {
-    public string Name;
+    public string itemName;
+    public string description;
+    public Sprite icon;
 
-    public Item(string itemName)
+    public Item(string itemName, Sprite icon)
     {
-        this.Name = itemName;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            InventoryManager.instance.AddItem(this);
-
-            gameObject.SetActive(false);
-
-            GetComponent<Collider2D>().enabled = false;
-
-            Debug.Log("Player collected: " + this.name);
-        }
+        this.name = itemName;
+        this.icon = icon;
     }
 
     public string GetItemName()
     {
-        return this.Name;
+        return itemName;
     }
 
     public void SetItemName(string newName)
     {
-        this.Name = newName;
-        return;
+        itemName = newName;
     }
 }

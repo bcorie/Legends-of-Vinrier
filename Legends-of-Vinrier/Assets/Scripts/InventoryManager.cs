@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager instance;
     public Transform inventoryPanel;
-    public GameObject inventoryItem;
-    private List<Item> collectedItems = new List<Item>();
+    public GameObject inventoryItemPrefab;
+    public GameObject itemInfoPanel;
 
-
-    public List<Item> items = new List<Item>();
+    public List<Item> collectedItems = new List<Item>();
+    public List<GameObject> inventorySlots = new List<GameObject>();
 
     private void Awake()
     {
@@ -32,61 +34,82 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(Item item)
     {
-        items.Add(item);
+        if (!collectedItems.Contains(item))
+        {
+            collectedItems.Add(item);
+            UpdateUI();
 
-        UpdateUI();
+            // Create the UI element for the new item
+            GameObject itemUI = Instantiate(inventoryItemPrefab);
+
+            // Find or create a container for the inventory items in the scene hierarchy
+            GameObject itemContainer = GameObject.Find("InventoryItemsContainer");
+            if (itemContainer == null)
+            {
+                itemContainer = new GameObject("InventoryItemsContainer");
+            }
+            itemUI.transform.SetParent(itemContainer.transform, false); // Set the parent here
+
+            // Access the Image component and assign the item's icon
+            Image itemImage = itemUI.GetComponentInChildren<Image>();
+            itemImage.sprite = item.icon;
+
+            Button button = itemUI.GetComponent<Button>();
+            button.onClick.AddListener(() => ShowItemInfo(item));
+        }
+        else
+        {
+            Debug.Log("Item " + item.name + " is already in the inventory.");
+        }
     }
-    //public void AddItem(string itemName, Sprite itemIcon)
-    //{
-    //    Item collectedItem = new Item { name = itemName, icon = itemIcon };
-    //    collectedItems.Add(collectedItem);
-    //
-    //    UpdateUI();
-    //}
 
     public void RemoveItem(string itemName)
     {
-        Item itemToRemove = items.Find(item => item.name == itemName);
+        Item itemToRemove = collectedItems.Find(item => item.name == itemName);
         if (itemToRemove != null)
         {
-            items.Remove(itemToRemove);
-
+            collectedItems.Remove(itemToRemove);
             UpdateUI();
         }
     }
 
     void UpdateUI()
     {
-        // Clear existing UI elements from the inventoryPanel
-        foreach (Transform child in inventoryPanel.transform)
+        for (int i = 0; i < collectedItems.Count; i++)
         {
-            Destroy(child.gameObject);
-        }
+            int index = i; // Create a local copy of 'i' for each item
+            if (i < inventorySlots.Count)
+            {
+                Image slotImage = inventorySlots[i].GetComponent<Image>();
+                slotImage.sprite = collectedItems[i].icon;
 
-        // Instantiate item slots for each collected item
-        //foreach (InventoryItem item in items)
-        //{
-        //    // Find the InventoryItem prefab corresponding to the item
-        //    InventoryItemPrefab prefab = FindInventoryItemPrefab(item);
-        //
-        //    if (prefab != null)
-        //    {
-        //        GameObject slot = Instantiate(prefab, inventoryPanel.transform);
-        //
-        //        // Configure the slot with the item's data
-        //        Image slotImage = slot.GetComponent<Image>();
-        //        Text itemNameText = slot.transform.Find("ItemNameText").GetComponent<Text>();
-        //
-        //        slotImage.sprite = item.icon;
-        //        itemNameText.text = item.name;
-        //    }
-        //}
+                Button slotButton = inventorySlots[i].GetComponent<Button>();
+                slotButton.onClick.RemoveAllListeners(); // Clear previous listeners
+                slotButton.onClick.AddListener(() => ShowItemInfo(collectedItems[index]));
+            }
+            else
+            {
+                GameObject itemUI = Instantiate(inventoryItemPrefab, inventoryPanel);
+                inventorySlots.Add(itemUI);
+                Image slotImage = itemUI.GetComponent<Image>();
+                slotImage.sprite = collectedItems[i].icon;
+
+                Button slotButton = itemUI.GetComponent<Button>();
+                slotButton.onClick.AddListener(() => ShowItemInfo(collectedItems[index]));
+            }
+        }
     }
 
-    //InventoryItemPrefab FindInventoryItemPrefab(InventoryItem item)
-    //{
-        // You can implement a method to find the corresponding InventoryItem prefab
-        // based on the item's properties, e.g., name or a unique identifier.
-        // Return the prefab that matches the item.
-    //}
+    void ShowItemInfo(Item item)
+    {
+        // Show the item information panel
+        itemInfoPanel.SetActive(true);
+    }
+
+    // Add a method to close the item information panel
+    public void CloseItemInfoPanel()
+    {
+        itemInfoPanel.SetActive(false);
+    }
 }
+

@@ -6,11 +6,11 @@ public class Player : Unit
     private Vector3 position;
     private List<Item> inventory;
     public GameObject playerGameObject;
+    private int xp;
     public Player(string unitName, int unitLevel, int damage, int maxHP, int physicalArmor, int magicalArmor) : base(unitName, unitLevel, damage, maxHP, physicalArmor, magicalArmor)
     {
         this.position = Vector3.zero;
         this.inventory = new List<Item>();
-
         GameManager gameManager = FindObjectOfType<GameManager>();
         if (gameManager != null)
         {

@@ -11,6 +11,7 @@ public class Unit : MonoBehaviour
     private int currentHP;
     private int physicalArmor;
     private int magicalArmor;
+    private int xp;
 
     // Damage types
     public enum DamageType
@@ -55,6 +56,18 @@ public class Unit : MonoBehaviour
     public int GetUnitLevel()
     {
         return this.unitLevel;
+    }
+
+    public void AddXP(int amount)
+    {
+        xp += amount;
+
+        if (xp / 10 > 1)
+        {
+            unitLevel = (int)(xp / 10);
+        }
+
+        Debug.Log("xp: " + xp + ", level: " + unitLevel);
     }
 
     public int GetDamage()

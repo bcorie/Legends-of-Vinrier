@@ -6,13 +6,14 @@ using UnityEngine;
 /// Part of the Skill Tree.
 /// Contains all data needed for each skill.
 /// </summary>
-public class Skill : MonoBehaviour
+[CreateAssetMenu(fileName = "Skill", menuName = "ScriptableObject/SkillSO")]
+public class Skill : ScriptableObject
 {
     public bool isUnlocked = false;
 
-    public string name;
+    public string title;
 
-    // base (universal), melee, magic, or ranged
+    // base (universal), melee, magic
     public string type;
 
     // description

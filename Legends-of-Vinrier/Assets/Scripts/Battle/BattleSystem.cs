@@ -277,7 +277,8 @@ public class BattleSystem : MonoBehaviour
                 gameManager.playerHealth = playerUnit.GetCurrentHP();
             }
 
-            // win screen
+            // get xp
+            playerUnit.AddXP(enemyUnit.GetUnitLevel() * 2);
 
             // return to overworld
             SceneManager.LoadScene("Map 1");

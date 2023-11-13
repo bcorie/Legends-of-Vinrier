@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleEnd.unity
     guid: 8277a477f5a85524da912f2231df0be4
+  - enabled: 1
+    path: Assets/Scenes/SkillTree.unity
+    guid: c8af44e16867ab34b98bd5e3fcbc5a6a
   m_configObjects: {}

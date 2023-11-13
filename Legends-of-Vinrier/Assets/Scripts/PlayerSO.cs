@@ -25,4 +25,14 @@ public class PlayerSO : ScriptableObject
         }
     }
 
+    /// <summary>
+    /// Spends skill points
+    /// </summary>
+    /// <param name="amount"></param>
+    /// <returns></returns>
+    public int SpendPoints(int amount)
+    {
+        return skillPoints -= amount;
+    }
+
 }

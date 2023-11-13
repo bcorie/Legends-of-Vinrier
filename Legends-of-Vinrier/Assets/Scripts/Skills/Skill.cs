@@ -20,7 +20,8 @@ public class Skill : ScriptableObject
     public string desc;
 
     // stat modifications (format: "attack+1" or "maxHP-2")
-    public List<string> modifications = new List<string>();
+    public string modifier;
+    //public List<string> modifications = new List<string>();
 
     // cost to unlock or requirement to meet
     public int cost;

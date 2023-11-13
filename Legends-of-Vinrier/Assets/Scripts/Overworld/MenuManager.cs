@@ -31,7 +31,7 @@ public class MenuManager : MonoBehaviour
 
     public void SkillClick()
     {
-        // open skill tree menu
+        SceneManager.LoadSceneAsync("SkillTree");
     }
 
     public void OptionClick()

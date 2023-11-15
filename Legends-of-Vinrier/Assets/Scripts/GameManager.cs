@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Handle cross-scene and core data throughout the game.
 /// </summary>
-public class GameManager : MonoBehaviour
+[CreateAssetMenu(fileName = "GameManager", menuName = "ScriptableObject/GameManagerSO")]
+public class GameManager : ScriptableObject
 {
     [SerializeField]
     GameObject player; // player prefab with Player class
@@ -22,39 +23,33 @@ public class GameManager : MonoBehaviour
     BattleSystem battleSystem;
     */
 
-    // Start is called before the first frame update
-    void Start()
+    // store scene names in an array
+    Scene[] scenes =
     {
-        /* objects will be destroyed when a new scene
-         * is loaded, but this prevents it from happening
-         * so all data can be moved across scenes
-         */
-        DontDestroyOnLoad(this);
+        SceneManager.GetSceneByPath("Assets/Scenes/Map 1.unity"),
+        SceneManager.GetSceneByPath("Assets/Scenes/SkillTree.unity")
 
+        // add rest
+    };
 
-
-
-    }
-
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// "Switches" scenes by activating or deactivating their objects.
+    /// </summary>
+    /// <param name="oldScene">The initial scene to be inactive.</param>
+    /// <param name="newScene">The target scene to become active.</param>
+    public void SwitchSceneByObjects(Scene oldScene, Scene newScene)
     {
-        #region Scene Management
-        /*
-        // battle scene to result screen based on outcome
-        if (SceneManager.GetActiveScene().name == "BattleScene")
+        GameObject[] oldObject = oldScene.GetRootGameObjects();
+        GameObject[] newObjects = newScene.GetRootGameObjects();
+
+        foreach (GameObject o in oldObject)
         {
-            if (battleSystem.state == BattleState.LOSE)
-            {
-
-            }
-
-            if (battleSystem.state == BattleState.WIN)
-            {
-
-            }
+            o.SetActive(false);
         }
-        */
-        #endregion Scene Management
+
+        foreach (GameObject o in newObjects)
+        {
+            o.SetActive(true);
+        }
     }
 }

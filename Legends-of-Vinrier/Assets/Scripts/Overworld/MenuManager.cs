@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField]
-    GameObject inventory;
+    [SerializeField] GameObject inventory;
+    [SerializeField] GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,7 @@ public class MenuManager : MonoBehaviour
 
     public void SkillClick()
     {
-        SceneManager.LoadSceneAsync("SkillTree");
+        gameManager.SwitchSceneByObjects(SceneManager.GetSceneByPath("Assets/Scenes/SkillTree.unity"), SceneManager.GetSceneByPath("Assets/Scenes/Map 1.unity"));
     }
 
     public void OptionClick()

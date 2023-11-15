@@ -29266,6 +29266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1685111490}
+  gameManager: {fileID: 11400000, guid: 629ed2d0e7997d74aac36a499de8c6d2, type: 2}
 --- !u!1 &790287024
 GameObject:
   m_ObjectHideFlags: 0

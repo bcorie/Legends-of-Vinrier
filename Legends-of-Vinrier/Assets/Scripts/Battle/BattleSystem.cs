@@ -43,10 +43,20 @@ public class BattleSystem : MonoBehaviour
     IEnumerator SetUpBattle()
     {
         GameObject playerStart = Instantiate(playerFab, new Vector3((float)-6.06, (float)-1.38), new Quaternion());
-        playerUnit = new Player("Player", 1, 5, 40, 3, 1);
+
+        GameManager gameManager = FindObjectOfType<GameManager>();
+
+        if (gameManager != null)
+        {
+            playerUnit = new Player("Player", gameManager.playerLevel, 5, 40, 3, 1);
+        }
+        else
+        {
+            playerUnit = new Player("Player", 1, 5, 40, 3, 1);
+        }
+            
         playerUnit.playerGameObject = playerStart;
         // Generates a random enemy or starts the boss fight
-        GameManager gameManager = FindObjectOfType<GameManager>();
         if (gameManager != null)
         {
             if (gameManager.boss1)

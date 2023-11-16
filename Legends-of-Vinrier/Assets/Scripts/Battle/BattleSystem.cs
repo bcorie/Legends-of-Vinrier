@@ -158,6 +158,8 @@ public class BattleSystem : MonoBehaviour
         if(isDead)
         {
             state = BattleState.WIN;
+            playerUnit.EarnXP(200);
+            playerUnit.CheckForLevelUp();
             EndBattle();
         }
         else
@@ -212,6 +214,8 @@ public class BattleSystem : MonoBehaviour
         if(isDead)
         {
             state = BattleState.WIN;
+            playerUnit.EarnXP(200);
+            playerUnit.CheckForLevelUp();
             EndBattle();
         }
         else

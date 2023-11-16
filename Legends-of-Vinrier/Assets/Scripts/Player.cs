@@ -60,4 +60,41 @@ public class Player : Unit
     {
         inventory.Add(item);
     }
+
+    public int GetLevel()
+    {
+        return unitLevel;
+    }
+
+    public void SetLevel(int newLevel)
+    {
+        unitLevel = newLevel;
+    }
+    public void EarnXP(int amount)
+    {
+        xp += amount;
+        CheckForLevelUp();
+    }
+
+    public void CheckForLevelUp()
+    {
+        int requiredXP = CalculateRequiredXP();
+        while (xp >= requiredXP)
+        {
+            xp -= requiredXP;
+            LevelUp();
+            requiredXP = CalculateRequiredXP();
+        }
+    }
+
+    public int CalculateRequiredXP()
+    {
+        return GetLevel() * 100;
+    }
+
+    public void LevelUp()
+    {
+        int newLevel = GetLevel() + 1;
+        SetLevel(newLevel);
+    }
 }

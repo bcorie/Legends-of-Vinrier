@@ -12,8 +12,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Test Area.unity
     guid: e49349b360a672c4181a22d0ce53798f
   - enabled: 1
+    path: Assets/Scenes/Hub Map.unity
+    guid: 62ed666eee493294198dbd3f0aac7749
+  - enabled: 1
     path: Assets/Scenes/Map 1.unity
     guid: 6701f0d9e17c1ec45a58342d1949a745
+  - enabled: 1
+    path: Assets/Scenes/Map 2.unity
+    guid: 9db064ea054ba6e40865dc5b6748ddb3
+  - enabled: 1
+    path: Assets/Scenes/Map 3.unity
+    guid: e41c860cd48cbc049a4674f13b2feb44
   - enabled: 1
     path: Assets/Scenes/BattleScene.unity
     guid: 4a46b728b5e3d9444b3d837ec2bb03cc
@@ -23,7 +32,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SkillTree.unity
     guid: c8af44e16867ab34b98bd5e3fcbc5a6a
-  - enabled: 1
-    path: Assets/Scenes/Hub Map.unity
-    guid: 62ed666eee493294198dbd3f0aac7749
   m_configObjects: {}

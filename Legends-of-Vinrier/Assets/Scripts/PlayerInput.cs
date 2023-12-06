@@ -24,13 +24,13 @@ public class PlayerInput : MonoBehaviour
         GameManager gameManager = FindObjectOfType<GameManager>();
         if (gameManager != null)
         {
-            if (gameManager.playerPosition != null)
+            if (gameManager.playerPosition == null)
             {
-                gameManager.playerPosition = new Vector2(50,60);
+                gameManager.playerPosition = Vector2.zero;
             }
             else
             {
-                gameManager.playerPosition = Vector2.zero;
+                rigidbody.position = gameManager.playerPosition;
             }
         }
 

@@ -46,6 +46,10 @@ public class Unit : MonoBehaviour
         {
             currentHP -= dmg;
         }
+        else
+        {
+            currentHP -= 1;
+        }
     }
 
     public string GetUnitName()
@@ -98,5 +102,23 @@ public class Unit : MonoBehaviour
     public void SetCurrentHP(int newValue)
     {
         this.currentHP = newValue;
+        if (this.currentHP > this.maxHP)
+        {
+            this.currentHP = this.maxHP;
+        }
+        else if (this.currentHP < 0)
+        {
+            this.currentHP = 0;
+        }
+    }
+
+    public void SetPhysicalArmor(int newValue)
+    {
+        this.physicalArmor = newValue;
+    }
+
+    public void SetMagicalArmor(int newValue)
+    {
+        this.magicalArmor = newValue;
     }
 }

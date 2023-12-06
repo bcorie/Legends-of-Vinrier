@@ -46,11 +46,11 @@ public class EnemyElgrim : Enemy
 
             if (type == DamageType.Physical)
             {
-                dmg -= this.GetPhysicalArmor() + this.GetUnitLevel();
+                dmg -= this.GetPhysicalArmor() + this.GetUnitLevel() * 5;
             }
             else if (type == DamageType.Magical)
             {
-                dmg -= this.GetMagicalArmor() + this.GetUnitLevel();
+                dmg -= this.GetMagicalArmor() + this.GetUnitLevel() * 5;
             }
 
             if (dmg > 0)

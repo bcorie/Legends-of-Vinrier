@@ -48,11 +48,11 @@ public class BattleSystem : MonoBehaviour
 
         if (gameManager != null)
         {
-            playerUnit = new Player("Player", gameManager.playerLevel, 5, 40, 3, 1);
+            playerUnit = new Player("Player", gameManager.playerLevel, 5, 40, 3, 1, 40);
         }
         else
         {
-            playerUnit = new Player("Player", 1, 5, 40, 3, 1);
+            playerUnit = new Player("Player", 1, 5, 40, 3, 1, 40);
         }
             
         playerUnit.playerGameObject = playerStart;
@@ -196,6 +196,9 @@ public class BattleSystem : MonoBehaviour
         // Ensure the player has moved to the exact end position
         playerUnit.playerGameObject.transform.position = endPos;
         playerUnit.MagicalAttack(enemyUnit);
+        playerUnit.SetCurrentMana(playerUnit.GetCurrentMana() - 4);
+        playerHUD.setMana(playerUnit.GetCurrentMana());
+        playerHUD.setHUD(playerUnit);
         enemyHUD.setHP(enemyUnit.GetCurrentHP());
         enemyHUD.setHUD(enemyUnit);
         bool isDead = enemyUnit.GetCurrentHP() <= 0;
@@ -289,13 +292,14 @@ public class BattleSystem : MonoBehaviour
             if (gameManager != null)
             {
                 gameManager.playerHealth = playerUnit.GetCurrentHP();
+                string sceneToLoad = gameManager.currentScene;
+                Debug.Log($"[BattleSystem] Winning the battle. Loading scene: {sceneToLoad}");
+                SceneManager.LoadScene(sceneToLoad);
             }
-
-            // get xp
-            playerUnit.AddXP(enemyUnit.GetUnitLevel() * 2);
-
-            // return to overworld
-            SceneManager.LoadScene("Map 1");
+            else
+            {
+                 Debug.LogError("[BattleSystem] GameManager not found!");
+            }
         }
         else if (state == BattleState.LOSE)
         {
@@ -362,9 +366,21 @@ public class BattleSystem : MonoBehaviour
         if (state != BattleState.PLAYER)
         return;
 
-        dialogueText.text = playerUnit.GetUnitName() + " Restores some Mana";
+       if (playerUnit.GetMaxMana() / 2 > playerUnit.GetCurrentMana())
+        {
+            playerUnit.SetCurrentMana(playerUnit.GetCurrentMana() + (playerUnit.GetMaxMana() / 2));
+            playerHUD.setMana(playerUnit.GetCurrentMana());
+            playerHUD.setHUD(playerUnit);
+        }
+        else
+        {
+            playerUnit.SetCurrentMana(playerUnit.GetMaxMana());
+            playerHUD.setMana(playerUnit.GetCurrentMana());
+            playerHUD.setHUD(playerUnit);
+        }
+        dialogueText.text = playerUnit.GetUnitName() + " Restores some mana";
         Destroy(manaPotionButton);
-         itemsPanel.SetActive(false);
+        itemsPanel.SetActive(false);
         StartCoroutine(EnemyTurn());
     }
    public void UpdateSoulUI(int soulCount)

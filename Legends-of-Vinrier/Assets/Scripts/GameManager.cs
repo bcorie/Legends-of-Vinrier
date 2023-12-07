@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     GameObject player; // player prefab with Player class
     public int playerHealth;
     public Vector2 playerPosition;
-
+    public string currentScene;
     public int playerLevel;
     public List<Item> playerInventory;
     // This variable will allow us to test the boss battle until the system
@@ -23,57 +23,40 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     BattleSystem battleSystem;
     */
-
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         /* objects will be destroyed when a new scene
          * is loaded, but this prevents it from happening
          * so all data can be moved across scenes
          */
-        DontDestroyOnLoad(this);
-
-
-
-
+        DontDestroyOnLoad(this.gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        Debug.Log("[GameManager] Awake and setup complete.");
     }
-
-    // Update is called once per frame
-    void Update()
+     public void SaveState()
     {
-        #region Scene Management
-        /*
-        // battle scene to result screen based on outcome
-        if (SceneManager.GetActiveScene().name == "BattleScene")
-        {
-            if (battleSystem.state == BattleState.LOSE)
-            {
-
-            }
-
-            if (battleSystem.state == BattleState.WIN)
-            {
-
-            }
-        }
-        */
-        #endregion Scene Management
+        playerPosition = GameObject.FindWithTag("Player").transform.position;
+        currentScene = SceneManager.GetActiveScene().name;
+        // Save other necessary states here
+         Debug.Log($"[GameManager] State saved: Scene - {currentScene}, Position - {playerPosition}");
     }
-/*
-    void LoadLevel()
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(map1)
+        Debug.Log($"[GameManager] Scene loaded: {scene.name}");
+        if (scene.name == currentScene)
         {
-            InstantiateEnemy()
-        }
-        else if(map2)
-        {
-            enemyList map2
-        }
-        else if (map3)
-        {
-            enemyList map3
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
+            {
+                player.transform.position = playerPosition;
+                Debug.Log($"[GameManager] Player position restored to {playerPosition}");
+                // Restore other states if necessary
+            }
+            else
+            {
+                Debug.LogError("[GameManager] Player object not found!");
+            }
         }
     }
-    */
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyMage : Enemy
 {
-    public EnemyMage(int unitLevel) : base("Mage", unitLevel, (2 + 3 * unitLevel), (20 + 5 * unitLevel), "Fire Bolt", 0, (2 + unitLevel))
+    public EnemyMage(int unitLevel) : base("Mage", unitLevel, (2 + 3 * unitLevel), (20 + 5 * unitLevel), "Fire Bolt", 0, (2 + unitLevel),0)
     {
         // Stats for an enemy Mage
     }

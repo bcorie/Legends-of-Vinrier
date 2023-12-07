@@ -9,7 +9,9 @@ public class BattleHUD : MonoBehaviour
     public Text nameText;
     public Text levelText;
     public Slider hpSlider;
-
+    public Slider manaSlider;
+    public Text manaCurrent;
+    public Text manaMax;
     public Text hpCurrent;
 
     public Text hpMax;
@@ -21,6 +23,9 @@ public class BattleHUD : MonoBehaviour
         hpSlider.value = unit.GetCurrentHP();
         hpCurrent.text = unit.GetCurrentHP().ToString();
         hpMax.text = unit.GetMaxHP().ToString();
+        manaSlider.value = unit.GetCurrentMana();
+        manaCurrent.text = unit.GetCurrentMana().ToString();
+        manaMax.text = unit.GetMaxMana().ToString();
     }
 
     public void setHP(int hp)
@@ -31,5 +36,14 @@ public class BattleHUD : MonoBehaviour
         hpCurrent.text = val.ToString();
 
         Debug.Log("Set hp to " + val);
+    }
+    public void setMana(int mana)
+    {
+        // keep the mana value at a minimum of 0
+        int val = (mana < 0) ? 0 : mana;
+        manaSlider.value = val;
+        manaCurrent.text = val.ToString();
+
+        Debug.Log("Set mana to " + val);  
     }
 }

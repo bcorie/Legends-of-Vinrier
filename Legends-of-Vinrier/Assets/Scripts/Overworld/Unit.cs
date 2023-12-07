@@ -13,6 +13,8 @@ public class Unit : MonoBehaviour
     private int magicalArmor;
     private int xp;
 
+    private int maxMana;
+    private int currentMana;
     // Damage types
     public enum DamageType
     {
@@ -20,7 +22,7 @@ public class Unit : MonoBehaviour
         Magical
     }
 
-    public Unit(string unitName, int unitLevel, int damage, int maxHP, int physicalArmor, int magicalArmor)
+    public Unit(string unitName, int unitLevel, int damage, int maxHP, int physicalArmor, int magicalArmor, int maxMana)
     {
         this.unitName = unitName;
         this.unitLevel = unitLevel;
@@ -29,6 +31,8 @@ public class Unit : MonoBehaviour
         this.currentHP = maxHP;
         this.physicalArmor = physicalArmor;
         this.magicalArmor = magicalArmor;
+        this.maxMana = maxMana;
+        this.currentMana = maxMana;
     }
 
     public virtual void TakeDamage(int dmg, DamageType type)
@@ -120,5 +124,26 @@ public class Unit : MonoBehaviour
     public void SetMagicalArmor(int newValue)
     {
         this.magicalArmor = newValue;
+    }
+    public int GetMaxMana()
+    {
+        return this.maxMana;
+    }
+
+    public int GetCurrentMana()
+    {
+        return this.currentMana;
+    }
+    public void SetCurrentMana(int newValue)
+    {
+        this.currentMana = newValue;
+        if (this.currentMana > this.maxMana)
+        {
+            this.currentMana = this.maxMana;
+        }
+        else if (this.currentMana < 0)
+        {
+            this.currentMana = 0;
+        }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySphinx : Enemy
 {
-    public EnemySphinx(int unitLevel) : base("The Second Sun", unitLevel, unitLevel, (54 + 6 * unitLevel), "Calculated Strike", (2 * unitLevel), (3 * unitLevel))
+    public EnemySphinx(int unitLevel) : base("The Second Sun", unitLevel, unitLevel, (54 + 6 * unitLevel), "Calculated Strike", (2 * unitLevel), (3 * unitLevel),0)
     {
         // Stats for an enemy Sphinx boss
     }

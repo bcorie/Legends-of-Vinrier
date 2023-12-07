@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyMummy : Enemy
 {
-    public EnemyMummy(int unitLevel) : base("Mummy", unitLevel, (3 * unitLevel), (24 + 6 * unitLevel), "Cursed Touch", (2 + unitLevel), (2 + unitLevel))
+    public EnemyMummy(int unitLevel) : base("Mummy", unitLevel, (3 * unitLevel), (24 + 6 * unitLevel), "Cursed Touch", (2 + unitLevel), (2 + unitLevel),0)
     {
         // Stats for an enemy Mage
     }

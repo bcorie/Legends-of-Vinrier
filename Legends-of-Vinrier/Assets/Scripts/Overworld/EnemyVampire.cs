@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyVampire : Enemy
 {
-    public EnemyVampire(int unitLevel) : base("Damon, the Undying", unitLevel, (8 + 2 * unitLevel), (45 + 15 * unitLevel), "Drain Life", (unitLevel), (2 * unitLevel))
+    public EnemyVampire(int unitLevel) : base("Damon, the Undying", unitLevel, (8 + 2 * unitLevel), (45 + 15 * unitLevel), "Drain Life", (unitLevel), (2 * unitLevel),0)
     {
         // Stats for an enemy Vampire boss
     }

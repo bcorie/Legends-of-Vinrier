@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyGhost : Enemy
 {
-    public EnemyGhost(int unitLevel) : base("Ghost", unitLevel, (2 + 2 * unitLevel), (10 + 2 * unitLevel), "Ethereal Slap", 100, unitLevel)
+    public EnemyGhost(int unitLevel) : base("Ghost", unitLevel, (2 + 2 * unitLevel), (10 + 2 * unitLevel), "Ethereal Slap", 100, unitLevel,0)
     {
         // Stats for an enemy Ghost
     }

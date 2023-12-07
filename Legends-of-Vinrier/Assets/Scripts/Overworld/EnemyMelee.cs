@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyMelee : Enemy
 {
-    public EnemyMelee(int unitLevel) : base("Melee", unitLevel, (2 + 2 * unitLevel), (20 + 10 * unitLevel), "Swing", (2 + unitLevel), 0)
+    public EnemyMelee(int unitLevel) : base("Melee", unitLevel, (2 + 2 * unitLevel), (20 + 10 * unitLevel), "Swing", (2 + unitLevel), 0,0)
     {
         // Stats for a melee enemy
     }

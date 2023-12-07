@@ -91,6 +91,7 @@ public class PlayerInput : MonoBehaviour
                 GameManager gameManager = FindObjectOfType<GameManager>();
                 if (gameManager != null)
                 {
+                    gameManager.SaveState();
                     gameManager.playerPosition = rigidbody.position;
                 }
                 SceneManager.LoadScene("BattleScene");

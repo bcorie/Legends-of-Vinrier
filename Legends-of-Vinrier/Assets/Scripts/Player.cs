@@ -7,7 +7,7 @@ public class Player : Unit
     private List<Item> inventory;
     public GameObject playerGameObject;
     private int xp;
-    public Player(string unitName, int unitLevel, int damage, int maxHP, int physicalArmor, int magicalArmor) : base(unitName, unitLevel, damage, maxHP, physicalArmor, magicalArmor)
+    public Player(string unitName, int unitLevel, int damage, int maxHP, int physicalArmor, int magicalArmor, int mana) : base(unitName, unitLevel, damage, maxHP, physicalArmor, magicalArmor, mana)
     {
         this.position = Vector3.zero;
         this.inventory = new List<Item>();

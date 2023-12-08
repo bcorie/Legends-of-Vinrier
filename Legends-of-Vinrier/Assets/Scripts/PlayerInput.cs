@@ -18,6 +18,7 @@ public class PlayerInput : MonoBehaviour
     public GameObject inventoryPanel;
     public InventoryManager inventoryManager;
 
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +47,9 @@ public class PlayerInput : MonoBehaviour
         {
             spawnOnEnemyCount--;
         }
+        animator.SetFloat("Horizontal", moveDirection.x);
+        animator.SetFloat("Vertical", moveDirection.y);
+        animator.SetFloat("Speed", moveDirection.sqrMagnitude);
     }
 
     void FixedUpdate()

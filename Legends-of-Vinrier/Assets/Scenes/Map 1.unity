@@ -1529,6 +1529,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1162179090, guid: fddead33c6a59284b9fad5d8ddf090d9, type: 3}
+    - target: {fileID: 7315156982844225150, guid: 0f467dde66590ed47bbbaa1dfa66dfbb, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7315156982844225150, guid: 0f467dde66590ed47bbbaa1dfa66dfbb, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27944,6 +27952,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1162179090, guid: fddead33c6a59284b9fad5d8ddf090d9, type: 3}
+    - target: {fileID: 7315156982844225150, guid: 0f467dde66590ed47bbbaa1dfa66dfbb, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7315156982844225150, guid: 0f467dde66590ed47bbbaa1dfa66dfbb, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27963,6 +27979,7 @@ GameObject:
   - component: {fileID: 561871893}
   - component: {fileID: 561871894}
   - component: {fileID: 561871895}
+  - component: {fileID: 561871896}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -28038,7 +28055,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 62290106ab36b34468b2f1a4bf8424d9, type: 3}
+  m_Sprite: {fileID: -152305465, guid: 995390d00ccaacd4986535b1f7369e22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -28058,7 +28075,7 @@ Transform:
   m_GameObject: {fileID: 561871889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.1, y: -0.9, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -28081,6 +28098,7 @@ MonoBehaviour:
   hud: {fileID: 1169960977}
   inventoryPanel: {fileID: 1685111490}
   inventoryManager: {fileID: 0}
+  animator: {fileID: 561871896}
 --- !u!61 &561871894
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -28117,7 +28135,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 4, y: 4}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -28139,6 +28157,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerGameObject: {fileID: 0}
+--- !u!95 &561871896
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561871889}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0ec953e57464d8e479b21ddf5e5cb1e8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &586576430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29462,7 +29501,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.3, y: 1}
-  m_AnchoredPosition: {x: 13.699951, y: 3.630005}
+  m_AnchoredPosition: {x: 13.700012, y: 3.630005}
   m_SizeDelta: {x: -87.11, y: -217.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &786863381
@@ -30099,6 +30138,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1162179090, guid: fddead33c6a59284b9fad5d8ddf090d9, type: 3}
+    - target: {fileID: 7315156982844225150, guid: 0f467dde66590ed47bbbaa1dfa66dfbb, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7315156982844225150, guid: 0f467dde66590ed47bbbaa1dfa66dfbb, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31102,6 +31149,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1162179090, guid: fddead33c6a59284b9fad5d8ddf090d9, type: 3}
+    - target: {fileID: 7315156982844225150, guid: 0f467dde66590ed47bbbaa1dfa66dfbb, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7315156982844225150, guid: 0f467dde66590ed47bbbaa1dfa66dfbb, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -44745,7 +44800,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.75222117}
   m_AnchorMax: {x: 0.3, y: 1}
-  m_AnchoredPosition: {x: 13.699951, y: -35.40001}
+  m_AnchoredPosition: {x: 13.700012, y: -35.40001}
   m_SizeDelta: {x: -87.100006, y: -83.274}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1424561884
@@ -45532,6 +45587,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1162179090, guid: fddead33c6a59284b9fad5d8ddf090d9, type: 3}
+    - target: {fileID: 7315156982844225150, guid: 0f467dde66590ed47bbbaa1dfa66dfbb, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7315156982844225150, guid: 0f467dde66590ed47bbbaa1dfa66dfbb, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -45724,6 +45787,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1162179090, guid: fddead33c6a59284b9fad5d8ddf090d9, type: 3}
+    - target: {fileID: 7315156982844225150, guid: 0f467dde66590ed47bbbaa1dfa66dfbb, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7315156982844225150, guid: 0f467dde66590ed47bbbaa1dfa66dfbb, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -47066,6 +47137,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1162179090, guid: fddead33c6a59284b9fad5d8ddf090d9, type: 3}
+    - target: {fileID: 7315156982844225150, guid: 0f467dde66590ed47bbbaa1dfa66dfbb, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7315156982844225150, guid: 0f467dde66590ed47bbbaa1dfa66dfbb, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -47147,6 +47226,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1162179090, guid: fddead33c6a59284b9fad5d8ddf090d9, type: 3}
+    - target: {fileID: 7315156982844225150, guid: 0f467dde66590ed47bbbaa1dfa66dfbb, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7315156982844225150, guid: 0f467dde66590ed47bbbaa1dfa66dfbb, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

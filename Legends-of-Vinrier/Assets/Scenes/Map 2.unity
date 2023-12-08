@@ -9598,7 +9598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   rigidbody: {fileID: 1188251700}
-  hud: {fileID: 0}
+  hud: {fileID: 1169960977}
   inventoryPanel: {fileID: 1685111490}
   inventoryManager: {fileID: 0}
   animator: {fileID: 1188251696}

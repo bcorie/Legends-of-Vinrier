@@ -74,7 +74,6 @@ public class PlayerInput : MonoBehaviour
         {
             hud.MenuToggle();
         }
-
     }
 
     void Move()

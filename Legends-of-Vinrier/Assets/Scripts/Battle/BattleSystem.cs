@@ -356,7 +356,6 @@ public class BattleSystem : MonoBehaviour
             playerHUD.setHUD(playerUnit);
         }
         dialogueText.text = playerUnit.GetUnitName() + " Restores some health";
-        Destroy(healPotionButton);
         itemsPanel.SetActive(false);
         StartCoroutine(EnemyTurn());
     }
@@ -379,10 +378,10 @@ public class BattleSystem : MonoBehaviour
             playerHUD.setHUD(playerUnit);
         }
         dialogueText.text = playerUnit.GetUnitName() + " Restores some mana";
-        Destroy(manaPotionButton);
         itemsPanel.SetActive(false);
         StartCoroutine(EnemyTurn());
     }
+
    public void UpdateSoulUI(int soulCount)
 {
   // First, clear out any existing soul prefabs
@@ -406,6 +405,5 @@ public class BattleSystem : MonoBehaviour
         // Set the position with an offset for each soul
         newSoul.transform.position = new Vector3(startPosition.x + (xOffset * i), startPosition.y, startPosition.z);
     }
-
 }
 }
